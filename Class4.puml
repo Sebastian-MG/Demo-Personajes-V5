@@ -1,0 +1,694 @@
+@startuml
+
+class AbstractFactory {
+    _builders
+    getBuiders()
+}
+
+
+class FactoryPersonaje {
+    _builders
+    __init__()
+}
+
+AbstractFactory <|- FactoryPersonaje
+
+class FactoryEquipamento {
+    _builders
+    __init__()
+}
+
+AbstractFactory <|- FactoryEquipamento
+class Abstract <<module>> << (M,orchid) >> #DarkSeaGreen {
+    ---
+    main()
+}
+
+Abstract .. AbstractFactory : contains >
+Abstract .. FactoryPersonaje : contains >
+Abstract .. FactoryEquipamento : contains >
+class Builder {
+    _build
+    getBuild()
+    MethodDirector()
+}
+
+
+class BuilderSprites {
+    _build
+    __ruta
+    __init__()
+    setRuta()
+    MethodDirector()
+    LlenaVectores()
+    BuildDown()
+    BuildUp()
+    BuildLeft()
+    BuildRight()
+}
+
+Builder <|- BuilderSprites
+
+class BuildSonidos {
+    __ruta
+    _build
+    BuidGrunido()
+    MethodDirector()
+    setRuta()
+    __init__()
+}
+
+Builder <|- BuildSonidos
+class Builder <<module>> << (M,orchid) >> #DarkSeaGreen {
+    buld
+    ---
+    main()
+}
+
+Builder .. Builder : contains >
+Builder .. BuilderSprites : contains >
+Builder .. BuildSonidos : contains >
+class Handler {
+    _personaje
+    _tipo
+    _siguiente
+    __init__()
+    getPersonaje()
+}
+
+Handler ..> PruebaManejador : _siguiente
+
+class PruebaManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- PruebaManejador
+PruebaManejador ..> MagoManejador : _siguiente
+
+class MagoManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- MagoManejador
+MagoManejador ..> AldeanoManejador : _siguiente
+
+class AldeanoManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- AldeanoManejador
+AldeanoManejador ..> OrcoManejador : _siguiente
+
+class OrcoManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- OrcoManejador
+OrcoManejador ..> TrollManejador : _siguiente
+
+class TrollManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- TrollManejador
+TrollManejador ..> CaballeroManejador : _siguiente
+
+class CaballeroManejador {
+    _personaje
+    _siguiente
+    _tipo
+    __init__()
+}
+
+Handler <|- CaballeroManejador
+class ChainResponsability <<module>> << (M,orchid) >> #DarkSeaGreen {
+    personaje
+    ---
+    main()
+}
+
+ChainResponsability .. Handler : contains >
+ChainResponsability .. PruebaManejador : contains >
+ChainResponsability .. MagoManejador : contains >
+ChainResponsability .. AldeanoManejador : contains >
+ChainResponsability .. OrcoManejador : contains >
+ChainResponsability .. TrollManejador : contains >
+ChainResponsability .. CaballeroManejador : contains >
+class Equipamento {
+    _durabilidad
+    _efecto
+    _sprites
+    _material
+    __init__()
+    getSprites()
+    getDurabilidad()
+    getMaterial()
+    setSprites()
+    setEfecto()
+    setDurabilidad()
+    getEfecto()
+    setMaterial()
+
+
+}
+
+sprite.Sprite <|- Equipamento
+
+class Escudo {
+    -radio
+    rect
+    image
+    __init__()
+    getRadio()
+    draw()
+    update()
+    setRadio()
+}
+
+Equipamento <|- Escudo
+
+class Arma {
+    rect
+    image
+    _factorAtaque
+    __init__()
+    setFactAtaque()
+    draw()
+    getFactAtaque()
+    update()
+}
+
+Equipamento <|- Arma
+
+class Personaje {
+    _decorados
+    _velocidadX
+    _posicion
+    _ruido
+    _direccion
+    ind
+    _maxVida
+    _velocidadPaso
+    _velocidadY
+    _inercia
+    rect
+    _fuerza
+    _stado
+    _vida
+    _equipamiento
+    _tipo
+    _sprites
+    image
+    setFuerza()
+    setPosicion()
+    setDecorados()
+    getSprites()
+    setvida()
+    setMaxVida()
+    getMaxVida()
+    addDecor()
+    update()
+    setTipo()
+    getLenDecor()
+    setDireccion()
+    choque()
+    centroLH()
+    getPosicion()
+    setxPos()
+    getYpos()
+    __init__()
+    getEquipamiento()
+    getFuerza()
+    invertDir()
+    addEquipo()
+    getLenEquipamento()
+    getXPos()
+    adapter()
+    popEquipo()
+    existir()
+    setYVel()
+    modEquipo(()
+    getTipo()
+    getDecorados()
+    setVelocidadPaso()
+    set Inercia()
+    getXVel()
+    modVida()
+    popDecor()
+    centroRH()
+    setYPos()
+    getDireccion()
+    drawSombra()
+    getVelocidadPaso()
+    setXVel()
+    setStado()
+    getStado()
+    drawdrawBarraVida()
+    getYVel()
+    getInercia()
+    setEquipamento()
+    setRuido()
+    clearEquipamento()
+    setSprites()
+    getEquipo()
+    getMaxVida()
+    getRuido()
+
+}
+
+sprite.Sprite <|- Personaje
+class ClasesJuego <<module>> << (M,orchid) >> #DarkSeaGreen {
+    pers
+    dicc
+    sqdo
+    ---
+    main()
+}
+
+ClasesJuego .. Equipamento : contains >
+ClasesJuego .. Escudo : contains >
+ClasesJuego .. Arma : contains >
+ClasesJuego .. Personaje : contains >
+class Composite <<module>> << (M,orchid) >> #DarkSeaGreen {
+    DIRS
+    VENTANA
+    atk
+    arma
+    shel
+    pers
+    build
+    ---
+    juego()
+    main()
+}
+class DcPersonaje {
+    _persDecorado
+    __init__()
+    getDecorado()
+}
+
+Personaje <|- DcPersonaje
+
+class DcPersonajeLadron {
+    _persDecorado
+    choque()
+}
+
+DcPersonaje <|- DcPersonajeLadron
+
+class DcPersonajeLadronLH {
+    _persDecorado
+    choque()
+}
+
+DcPersonaje <|- DcPersonajeLadronLH
+
+class DcPersonajeCrabs {
+    rect
+    image
+    ind
+    update()
+}
+
+DcPersonaje <|- DcPersonajeCrabs
+
+class DcArmaDobleFilo {
+    _factorAtaque
+    _durabilidad
+    _material
+    _efecto
+    _sprites
+    getEfecto()
+    __init__()
+}
+
+Arma <|- DcArmaDobleFilo
+
+class DcArmaPotenciada {
+    _factorAtaque
+    _durabilidad
+    _material
+    _efecto
+    _sprites
+    getFactAtaque()
+    __init__()
+}
+
+Arma <|- DcArmaPotenciada
+class Decorator <<module>> << (M,orchid) >> #DarkSeaGreen {
+    pers
+    ---
+    main()
+}
+
+Decorator .. DcPersonaje : contains >
+Decorator .. DcPersonajeLadron : contains >
+Decorator .. DcPersonajeLadronLH : contains >
+Decorator .. DcPersonajeCrabs : contains >
+Decorator .. DcArmaDobleFilo : contains >
+Decorator .. DcArmaPotenciada : contains >
+class FlyweightPersonaje {
+    addNPC()
+    __init__()
+}
+
+class Flyweight <<module>> << (M,orchid) >> #DarkSeaGreen {
+    factory
+    pers1
+    pers2
+    pers3
+    pers4
+    ---
+    main()
+}
+
+Flyweight .. FlyweightPersonaje : contains >
+class Game <<module>> << (M,orchid) >> #DarkSeaGreen {
+    pantalla
+    VENTANA
+    JUGABILIDAD
+    ---
+    main()
+}
+class Launcher <<module>> << (M,orchid) >> #DarkSeaGreen {
+    tips
+    launcher
+    fondo
+    ancho
+    lineas
+    contenedor
+    imas
+    menu
+    btn
+    ---
+    Execute()
+    main()
+}
+class Pantalla {
+    COLORDIBUJO
+    SELECT_PLAYER
+    FUENTE
+    COLORFONDO
+    ORDA
+    MEDIDA
+    CLOCK
+    TITULO
+    TIPOS
+    FPS
+    SONG_END
+    FABRICA
+    FONDO
+    MEMENTO
+    player
+    __init__()
+    dibujarInventario()
+    iniciarJugador()
+    crearOrda()
+    posY()
+
+
+
+
+    }
+
+Pantalla ..> pyg.Color : COLORFONDO
+Pantalla ..> pyg.Color : COLORDIBUJO
+Pantalla ..> FlyweightPersonaje : FABRICA
+class Pantalla <<module>> << (M,orchid) >> #DarkSeaGreen {
+    pantalla
+    ---
+    main()
+}
+
+Pantalla .. Pantalla : contains >
+class Prototype {
+    _prototipo
+    getPrototipo()
+    clone()
+}
+
+
+class PrototipoPersonaje {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PrototipoPersonaje
+PrototipoPersonaje ..> Personaje : _prototipo
+
+class PersonajePruebas {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajePruebas
+PersonajePruebas ..> Personaje : _prototipo
+
+class PersonajeMago {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajeMago
+PersonajeMago ..> Personaje : _prototipo
+
+class PersonajeAldeano {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajeAldeano
+PersonajeAldeano ..> Personaje : _prototipo
+
+class PersonajeOrco {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajeOrco
+PersonajeOrco ..> Personaje : _prototipo
+
+class PersonajeTroll {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajeTroll
+PersonajeTroll ..> Personaje : _prototipo
+
+class PersonajeCaballero {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PersonajeCaballero
+PersonajeCaballero ..> Personaje : _prototipo
+
+class PrototipoEquipamento {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- PrototipoEquipamento
+PrototipoEquipamento ..> Equipamento : _prototipo
+
+class EscudoMadera {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- EscudoMadera
+EscudoMadera ..> Escudo : _prototipo
+
+class ArmaMadera {
+    _prototipo
+    __init__()
+    clone()
+}
+
+Prototype <|- ArmaMadera
+ArmaMadera ..> Arma : _prototipo
+
+class ObjectFactory {
+}
+
+class Prototype <<module>> << (M,orchid) >> #DarkSeaGreen {
+    pers1
+    pers2
+    ---
+    main()
+}
+
+Prototype .. Prototype : contains >
+Prototype .. PrototipoPersonaje : contains >
+Prototype .. PersonajePruebas : contains >
+Prototype .. PersonajeMago : contains >
+Prototype .. PersonajeAldeano : contains >
+Prototype .. PersonajeOrco : contains >
+Prototype .. PersonajeTroll : contains >
+Prototype .. PersonajeCaballero : contains >
+Prototype .. PrototipoEquipamento : contains >
+Prototype .. EscudoMadera : contains >
+Prototype .. ArmaMadera : contains >
+Prototype .. ObjectFactory : contains >
+class StatePersonaje {
+    _dir
+    _observador
+    __init__()
+    getHand()
+    draw()
+    getRHand()
+    getDir()
+}
+
+
+class StatePersD {
+    _dir
+    getRHand()
+    getLHand()
+    draw()
+}
+
+StatePersonaje <|- StatePersD
+
+class StatePersU {
+   _dir
+    getRHand()
+    getLHand()
+    draw()
+}
+
+StatePersonaje <|- StatePersU
+
+class StatePersL {
+    _dir
+    getRHand()
+    getLHand()
+    draw()
+}
+
+StatePersonaje <|- StatePersL
+
+class StatePersR {
+    _dir
+    getRHand()
+    getLHand()
+    draw()
+}
+
+StatePersonaje <|- StatePersR
+class State <<module>> << (M,orchid) >> #DarkSeaGreen {
+    ---
+    main()
+}
+
+State .. StatePersonaje : contains >
+State .. StatePersD : contains >
+State .. StatePersU : contains >
+State .. StatePersL : contains >
+State .. StatePersR : contains >
+class StrategyJuego {
+    _juego
+    _ventana
+    _pantalla
+    setJuego()
+    getVentana()
+    __init__()
+    setVentana()
+    getVentana()
+    execute()
+    setPantalla()
+    getJuego()
+}
+
+
+class StrategyJugar {
+    _juego
+    _pantalla
+    execute()
+}
+
+StrategyJuego <|- StrategyJugar
+StrategyJugar ..> StrategyPausa : _juego
+
+class StrategyPausa {
+    _juego
+    execute()
+}
+
+StrategyJuego <|- StrategyPausa
+StrategyPausa ..> StrategyJugar : _juego
+class StrategyJuego <<module>> << (M,orchid) >> #DarkSeaGreen {
+    player
+    t
+    saves
+    ORDA
+    ---
+    main()
+}
+
+StrategyJuego .. StrategyJuego : contains >
+StrategyJuego .. StrategyJugar : contains >
+StrategyJuego .. StrategyPausa : contains >
+class TiposPersonajes {
+    MAGO
+    TROLL
+    ALDEANO
+    CABALLERO
+    ORCO
+    }
+
+Enum <|- TiposPersonajes
+class Tipos <<module>> << (M,orchid) >> #DarkSeaGreen {
+    ---
+    main()
+}
+
+Tipos .. TiposPersonajes : contains >
+
+
+'Literate Code Map macros
+
+!function method($name, $params="")
+.. def <u><b>$name</b></u>($params) ..
+!endfunction
+
+!function xref($dest, $kind="dest")
+!if ($kind == "source")
+<color:Red><u>$dest</u></color>
+!else
+<color:Red>$dest</color>
+!endif
+!endfunction
+
+!$code = "<color:royalBlue><size:14>"
+!$codeb = "<color:DarkSlateGray><size:12>"
+!$codeg = "<color:Gray><size:12>"
+!$codeb = "<color:royalBlue>"
+!$codep = "<color:Purple><size:14>"
+
+@enduml
